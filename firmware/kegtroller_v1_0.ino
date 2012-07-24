@@ -157,19 +157,22 @@ void loop()
       
       Serial.println("Auth successful - waiting for button");
       boolean pourDone = false;
-//      while (!pourDone)
-//      {
-//        if (digitalRead(PIN_BUTTON) == HIGH)
-//        {
-//          unsigned long nowMillis = millis();
-//          digitalWrite(PIN_LED_RED, HIGH);
-//          digitalWrite(PIN_LED_YELLOW, HIGH);
-//          digitalWrite(PIN_LED_GREEN, HIGH);
-//          digitalWrite(PIN_VALVE, HIGH);
-//          delay(POUR_DURATION);
-//          pourDone = true;
-//        }
-//      }
+      while (!pourDone)
+      {
+        if (digitalRead(PIN_BUTTON) == HIGH)
+        {
+          unsigned long nowMillis = millis();
+          digitalWrite(PIN_LED_RED, HIGH);
+          digitalWrite(PIN_LED_YELLOW, HIGH);
+          digitalWrite(PIN_LED_GREEN, HIGH);
+	  Serial.println("Opening valve");
+          digitalWrite(PIN_VALVE, HIGH);
+          delay(POUR_DURATION);
+	  Serial.println("Closing valve");
+          digitalWrite(PIN_VALVE, LOW);
+          pourDone = true;
+        }
+      }
     }
     else
     {
